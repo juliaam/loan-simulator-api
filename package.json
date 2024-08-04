@@ -1,0 +1,25 @@
+{
+  "name": "simular-emprestimo-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js",
+    "start:docker": "npm run build && docker-compose up",
+    "dev": "nodemon src/app.ts"
+  },
+  "keywords": [],
+  "author": "Júlia",
+  "license": "ISC",
+  "dependencies": {
+    "aws-serverless-express": "^3.4.0",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2"
+  }
+}
