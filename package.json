@@ -6,8 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "npm run build && node dist/index.js",
-    "start:docker": "npm run build && docker-compose up",
     "dev": "nodemon src/app.ts"
   },
   "keywords": [],
