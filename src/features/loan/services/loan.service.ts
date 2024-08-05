@@ -11,8 +11,7 @@ const interestPerState = {
 const ONE_PERCENT = 0.01;
 
 const create = async (data: ILoan) => {
-  const loan = await createLoan(data);
-  return loan;
+  return await createLoan(data);
 };
 
 const simulate = async (data: ILoan) => {
