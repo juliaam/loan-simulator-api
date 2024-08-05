@@ -16,6 +16,7 @@ const create = async (data: ILoan) => {
 };
 
 const simulate = async (data: ILoan) => {
+  
   if (data.total_value < 50000) {
     throw new Error("Valor mínimo para empréstimo é de R$50.5000");
   }
@@ -26,9 +27,9 @@ const simulate = async (data: ILoan) => {
     );
   }
 
-  const interestPerCent: number = interestPerState[data.uf];
+  const result: any = [];\
 
-  const result: any = [];
+  const interestPerCent: number = interestPerState[data.uf];
 
   let outStadingBalance = data.total_value;
   let installmentDate = new Date();
