@@ -8,10 +8,10 @@ datasource db {
 }
 
 model loan {
-  id          Int      @id @default(autoincrement())
-  cpf         String   @db.Char(1)
-  uf          String   @db.Char(1)
-  birth       DateTime @db.Date
+  id          Int     @id @default(autoincrement())
+  cpf         String  @db.Char(11)
+  uf          String  @db.Char(2)
+  birth       String  @db.VarChar
   total_value BigInt?
   month_value BigInt?
 }

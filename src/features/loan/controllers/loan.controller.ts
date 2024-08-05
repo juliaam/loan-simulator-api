@@ -3,7 +3,7 @@ import { LoanService } from "../services/loan.service";
 export interface ILoan {
   cpf: string;
   uf: "mg" | "sp" | "rj" | "es";
-  birth: Date;
+  birth: string;
   total_value: number;
   month_value: number;
 }
