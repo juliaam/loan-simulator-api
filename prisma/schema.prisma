@@ -6,3 +6,12 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model loan {
+  id          Int      @id @default(autoincrement())
+  cpf         String   @db.Char(1)
+  uf          String   @db.Char(1)
+  birth       DateTime @db.Date
+  total_value BigInt?
+  month_value BigInt?
+}
