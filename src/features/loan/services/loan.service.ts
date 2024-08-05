@@ -2,10 +2,10 @@ import { createLoan } from "../repositorys/loan.repository";
 import { ILoan } from "../controllers/loan.controller";
 
 const interestPerState = {
-  mg: 1,
-  sp: 0.8,
-  rj: 0.9,
-  es: 1.11,
+  mg: 0.01,
+  sp: 0.008,
+  rj: 0.009,
+  es: 0.0111,
 };
 
 const ONE_PERCENT = 0.01;
@@ -26,7 +26,36 @@ const simulate = async (data: ILoan) => {
     );
   }
 
-  const interest: number = interestPerState[data.uf];
+  const interestPerCent: number = interestPerState[data.uf];
+
+  const result: any = [];
+
+  let outStadingBalance = data.total_value;
+  let installmentDate = new Date();
+
+  while (outStadingBalance !== 0) {
+    const interest = outStadingBalance * interestPerCent;
+    const adjustedOutstandingBalance = outStadingBalance + interest;
+
+    const installmentAmount =
+      data.month_value > adjustedOutstandingBalance
+        ? adjustedOutstandingBalance
+        : data.month_value;
+
+    result.push({
+      outstandingBalance: outStadingBalance.toFixed(2),
+      interest: interest.toFixed(2),
+      adjustedOutstandingBalance: adjustedOutstandingBalance.toFixed(2),
+      installmentAmount: installmentAmount.toFixed(2),
+      dueDate: installmentDate,
+    });
+
+    outStadingBalance = adjustedOutstandingBalance - installmentAmount;
+
+    installmentDate.setMonth(installmentDate.getMonth() + 1);
+  }
+
+  return result;
 };
 
 export const LoanService = {

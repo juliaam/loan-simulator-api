@@ -1,4 +1,4 @@
-import { prisma } from "@services/prisma";
+import { prisma } from "../../../services/prisma";
 import { ILoan } from "../controllers/loan.controller";
 
 export const createLoan = async (data: ILoan) => {

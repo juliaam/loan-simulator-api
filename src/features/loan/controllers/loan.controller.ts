@@ -8,7 +8,7 @@ export interface ILoan {
   month_value: number;
 }
 
-const create = async (req, res) => {
+const create = async (req: any, res: any) => {
   try {
     const loan = await LoanService.create(req.body);
     res.status(200).send(loan);
@@ -17,7 +17,7 @@ const create = async (req, res) => {
   }
 };
 
-const simulate = async (req, res) => {
+const simulate = async (req: any, res: any) => {
   try {
     const simulate = await LoanService.simulate(req.body);
     res.status(200).send(simulate);

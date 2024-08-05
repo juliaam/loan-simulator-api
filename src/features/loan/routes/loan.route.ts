@@ -1,12 +1,9 @@
 import { Router } from "express";
+import { loanController } from "../controllers/loan.controller";
 
 const router = Router();
 
-const loanController = {
-  something: () => 1,
-};
-
-router.get("/", loanController.something);
-router.post("/", loanController.something);
+router.post("/simulate", loanController.simulate);
+router.post("/", loanController.create);
 
 export default router;
