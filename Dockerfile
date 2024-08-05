@@ -10,7 +10,7 @@ COPY . .
 
 RUN pnpm install
 
-RUN npx prisma generate
+RUN pnpm dlx prisma generate
 
 EXPOSE 3000
 
