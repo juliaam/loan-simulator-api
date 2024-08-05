@@ -9,8 +9,8 @@ datasource db {
 
 model loan {
   id          Int    @id @default(autoincrement())
-  cpf         String @db.Char(11)
-  uf          String @db.Char(2)
+  cpf         String @db.VarChar
+  uf          String @db.VarChar
   birth       String @db.VarChar
   total_value Int
   month_value Int
