@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { LoanService } from "../services/loan.service";
 import { loanSchema } from "./loan-validate";
+import { Request, Response } from "express";
 
 export interface ILoan {
   cpf: string;
@@ -10,7 +11,7 @@ export interface ILoan {
   month_value: number;
 }
 
-const findAll = async (req: any, res: any) => {
+const findAll = async (req: Request, res: Response) => {
   try {
     const loans = await LoanService.findAll();
     res.status(200).send(loans);
@@ -19,7 +20,7 @@ const findAll = async (req: any, res: any) => {
   }
 };
 
-const create = async (req: any, res: any) => {
+const create = async (req: Request, res: Response) => {
   try {
     const parsedData = loanSchema.parse(req.body);
 
@@ -37,7 +38,7 @@ const create = async (req: any, res: any) => {
   }
 };
 
-const simulate = async (req: any, res: any) => {
+const simulate = async (req: Request, res: Response) => {
   try {
     const parsedData = loanSchema.parse(req.body);
 
