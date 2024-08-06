@@ -49,10 +49,10 @@ const simulate = async (data: ILoan) => {
     result.totalInterest = result.totalInterest + interest;
 
     result.parcels.push({
-      outstandingBalance: outStadingBalance,
-      interest: interest,
-      adjustedOutstandingBalance: adjustedOutstandingBalance,
-      installmentAmount: installmentAmount,
+      outStadingBalance,
+      interest,
+      adjustedOutstandingBalance,
+      installmentAmount,
       dueDate: installmentDate,
     });
 

@@ -7,9 +7,11 @@ export const loanSchema = z.object({
   uf: z.enum(["mg", "sp", "rj", "es"], {
     errorMap: (issue, _ctx) => ({ message: "Estado inválido" }),
   }),
-  birth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-    message: "Data de nascimento deve estar no formato DD/MM/YYYY",
-  }),
+  birth: z
+    .string()
+    .regex(/^\d{2}\/\d{2}\/\d{4}$/, {
+      message: "Data de nascimento deve estar no formato DD/MM/YYYY",
+    }),
   total_value: z.number().nonnegative({
     message: "O valor total deve ser um número positivo ou zero",
   }),
