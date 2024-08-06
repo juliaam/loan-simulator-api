@@ -5,8 +5,9 @@ import loanRouter from "../src/features/loan/routes/loan.route";
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:5173",
-  optionsSuccessStatus: 200,
+  origin: "*",
+  methods: "*",
+  allowedHeaders: "*",
 };
 
 app.use(cors(corsOptions));

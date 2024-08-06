@@ -62,7 +62,6 @@ const simulate = async (data: ILoan) => {
 
   result.totalWithInterest = result.totalInterest + data.total_value;
   result.totalInterest = result.totalInterest;
-  console.log(result.totalWithInterest);
 
   return result;
 };
