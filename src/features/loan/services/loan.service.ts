@@ -8,18 +8,18 @@ const interestPerState = {
   es: 0.0111,
 };
 
-const ONE_PERCENT = 0.01;
-
 const create = async (data: ILoan) => {
   return await createLoan(data);
 };
 
 const simulate = async (data: ILoan) => {
+  const interest = interestPerState[data.uf];
+
   if (data.total_value < 50000) {
     throw new Error("Valor mínimo para empréstimo é de R$50.5000");
   }
 
-  if (data.month_value < ONE_PERCENT * data.month_value) {
+  if (data.month_value < interest * data.month_value) {
     throw new Error(
       "Valor mínimo da parcela mensal é de 1% do valor do empréstimo"
     );
@@ -28,6 +28,8 @@ const simulate = async (data: ILoan) => {
   const result: any = {
     parcels: [],
     monthsToQuit: 0,
+    totalInterest: 0,
+    totalPerCent: interest * 100,
   };
 
   const interestPerCent: number = interestPerState[data.uf];
@@ -44,18 +46,23 @@ const simulate = async (data: ILoan) => {
         : data.month_value;
 
     result.monthsToQuit++;
+    result.totalInterest = result.totalInterest + interest;
 
     result.parcels.push({
-      outstandingBalance: outStadingBalance.toFixed(2),
-      interest: interest.toFixed(2),
-      adjustedOutstandingBalance: adjustedOutstandingBalance.toFixed(2),
-      installmentAmount: installmentAmount.toFixed(2),
+      outstandingBalance: outStadingBalance,
+      interest: interest,
+      adjustedOutstandingBalance: adjustedOutstandingBalance,
+      installmentAmount: installmentAmount,
       dueDate: installmentDate,
     });
 
     outStadingBalance = adjustedOutstandingBalance - installmentAmount;
     installmentDate.setMonth(installmentDate.getMonth() + 1);
   }
+
+  result.totalWithInterest = result.totalInterest + data.total_value;
+  result.totalInterest = result.totalInterest;
+  console.log(result.totalWithInterest);
 
   return result;
 };
