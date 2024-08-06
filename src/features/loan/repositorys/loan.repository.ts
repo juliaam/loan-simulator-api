@@ -6,3 +6,6 @@ export const createLoan = async (data: ILoan) => {
     data,
   });
 };
+export const findAllLoans = async () => {
+  return await prisma.loan.findMany();
+};

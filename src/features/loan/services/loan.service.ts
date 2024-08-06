@@ -1,4 +1,4 @@
-import { createLoan } from "../repositorys/loan.repository";
+import { createLoan, findAllLoans } from "../repositorys/loan.repository";
 import { ILoan } from "../controllers/loan.controller";
 
 const interestPerState = {
@@ -22,6 +22,10 @@ const create = async (data: ILoan) => {
   }
 
   return await createLoan(data);
+};
+
+const findAll = async () => {
+  return await findAllLoans();
 };
 
 const simulate = async (data: ILoan) => {
@@ -81,4 +85,5 @@ const simulate = async (data: ILoan) => {
 export const LoanService = {
   create,
   simulate,
+  findAll,
 };

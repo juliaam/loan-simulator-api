@@ -10,6 +10,15 @@ export interface ILoan {
   month_value: number;
 }
 
+const findAll = async (req: any, res: any) => {
+  try {
+    const loans = await LoanService.findAll();
+    res.status(200).send(loans);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 const create = async (req: any, res: any) => {
   try {
     const parsedData = loanSchema.parse(req.body);
@@ -46,6 +55,7 @@ const simulate = async (req: any, res: any) => {
   }
 };
 export const loanController = {
+  findAll,
   create,
   simulate,
 };
