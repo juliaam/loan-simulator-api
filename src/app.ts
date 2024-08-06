@@ -20,7 +20,7 @@ app.use("/api/loan", loanRouter);
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(`Servidor está executando na porta ${PORT}`);
+  console.log(`Server is runnning in the port ${PORT}`);
 });
 
 export default app;
