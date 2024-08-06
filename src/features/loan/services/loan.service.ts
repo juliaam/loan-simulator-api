@@ -25,7 +25,10 @@ const simulate = async (data: ILoan) => {
     );
   }
 
-  const result: any = [];
+  const result: any = {
+    parcels: [],
+    monthsToQuit: 0,
+  };
 
   const interestPerCent: number = interestPerState[data.uf];
 
@@ -35,13 +38,14 @@ const simulate = async (data: ILoan) => {
   while (outStadingBalance !== 0) {
     const interest = outStadingBalance * interestPerCent;
     const adjustedOutstandingBalance = outStadingBalance + interest;
-
     const installmentAmount =
       data.month_value > adjustedOutstandingBalance
         ? adjustedOutstandingBalance
         : data.month_value;
 
-    result.push({
+    result.monthsToQuit++;
+
+    result.parcels.push({
       outstandingBalance: outStadingBalance.toFixed(2),
       interest: interest.toFixed(2),
       adjustedOutstandingBalance: adjustedOutstandingBalance.toFixed(2),
@@ -50,7 +54,6 @@ const simulate = async (data: ILoan) => {
     });
 
     outStadingBalance = adjustedOutstandingBalance - installmentAmount;
-
     installmentDate.setMonth(installmentDate.getMonth() + 1);
   }
 
