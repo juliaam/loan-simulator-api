@@ -8,7 +8,19 @@ const interestPerState = {
   es: 0.0111,
 };
 
+const ONE_PERCENT = 0.01;
+
 const create = async (data: ILoan) => {
+  if (data.total_value < 50000) {
+    throw new Error("Valor mínimo para empréstimo é de R$50.5000");
+  }
+
+  if (data.month_value < ONE_PERCENT * data.month_value) {
+    throw new Error(
+      "Valor mínimo da parcela mensal é de 1% do valor do empréstimo"
+    );
+  }
+
   return await createLoan(data);
 };
 
@@ -19,7 +31,7 @@ const simulate = async (data: ILoan) => {
     throw new Error("Valor mínimo para empréstimo é de R$50.5000");
   }
 
-  if (data.month_value < interest * data.month_value) {
+  if (data.month_value < ONE_PERCENT * data.month_value) {
     throw new Error(
       "Valor mínimo da parcela mensal é de 1% do valor do empréstimo"
     );
